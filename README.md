@@ -6,6 +6,8 @@
 
 Processamento de **sísmica de refração direto no navegador**: abra os arquivos dos tiros, marque as primeiras chegadas e inverta os tempos para obter o modelo de velocidade da onda P em subsuperfície.
 
+**Abra e use: <https://allanspadini.github.io/seismic-navigator/>**
+
 Não há instalação nem servidor. Os arquivos são lidos e processados no seu computador e **não são enviados a lugar nenhum**.
 
 ## O que dá para fazer
