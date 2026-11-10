@@ -100,6 +100,7 @@ Como está implementada (`src/core/tomo/`):
 - Unidades internas em SI: metros, segundos, m/s. Converter na entrada (µs dos headers) e na exibição (ms na tela).
 - Código e identificadores em inglês; textos da interface em português, centralizados para permitir tradução depois.
 - Tema claro por padrão, com botão para alternar; a escolha fica em `localStorage`. As cores vêm das variáveis CSS em `:root` e `:root[data-theme='dark']`, e os canvas as leem via `readTheme()` — não fixar cores no código de desenho.
+- [docs/banner.svg](docs/banner.svg) é usado no README e também na página inicial (importado como texto em `src/main.ts`, com as cores trocadas pelas variáveis do tema). Ao mudar uma cor no SVG, atualize `BANNER_COLORS`.
 - Código numérico usa `Float32Array`/`Float64Array`, não arrays genéricos.
 - Todo parser e toda rotina numérica tem teste. Os parsers são testados com arquivos sintéticos pequenos montados no próprio teste; ainda não há arquivos reais no repositório.
 - A modelagem direta é validada contra casos com solução analítica (meio homogêneo, duas camadas planas).

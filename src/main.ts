@@ -1,4 +1,5 @@
 import './style.css';
+import bannerSvg from '../docs/banner.svg?raw';
 import { autoPick } from './core/autopick';
 import { createSyntheticSurvey } from './core/synthetic';
 import { suggestParams, type InversionInput, type InversionParams, type InversionResult, type InversionShot } from './core/tomo/invert';
@@ -98,6 +99,33 @@ const emptyState = el('div', { className: 'drop-zone' }, [
   el('p', { className: 'muted', textContent: t.formatsNote }),
   el('p', { className: 'muted', textContent: t.privacyNote }),
   el('p', { className: 'muted', textContent: t.projectNote }),
+]);
+
+// The README banner doubles as the start-screen illustration. Its fixed
+// colours are swapped for the theme variables so it follows light and dark.
+const BANNER_COLORS: [string, string][] = [
+  ['fill="#ffffff"', 'fill="var(--bg)"'],
+  ['#f4f6fb', 'var(--surface)'],
+  ['#1c2430', 'var(--text)'],
+  ['#5d6b7c', 'var(--muted)'],
+  ['#d5dbe3', 'var(--border)'],
+  ['#2b2140', 'var(--trace)'],
+  ['#3a2d55', 'var(--trace-fill)'],
+  ['#d4351c', 'var(--pick)'],
+  ['#1f5fd0', 'var(--accent)'],
+];
+const hero = el('div', { className: 'hero' });
+hero.innerHTML = BANNER_COLORS.reduce((svg, [from, to]) => svg.replaceAll(from, to), bannerSvg);
+
+const compassIcon = el('span', { className: 'compass' });
+compassIcon.innerHTML =
+  '<svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="13.5" fill="var(--surface)" stroke="var(--text)" stroke-width="2.5"/>' +
+  '<path d="M22.5 7.5 13.6 13.6 18.4 18.4Z" fill="var(--pick)"/><path d="M9.5 24.5 13.6 13.6 18.4 18.4Z" fill="var(--text)"/></svg>';
+const titleBlock = el('div', {}, [
+  el('h1', {}, [
+    el('button', { type: 'button', className: 'home-link', title: t.goHome, onclick: goHome }, [compassIcon, t.appTitle]),
+  ]),
+  el('p', { className: 'muted', textContent: t.appSubtitle }),
 ]);
 
 const tabButtons: Record<Tab, HTMLButtonElement> = {
@@ -308,12 +336,10 @@ const workspace = el('div', { className: 'workspace' }, [tabBar, pickPanel, curv
 
 document.querySelector<HTMLDivElement>('#app')!.append(
   el('header', { className: 'app-header' }, [
-    el('div', {}, [
-      el('h1', {}, [el('button', { type: 'button', className: 'home-link', textContent: t.appTitle, title: t.goHome, onclick: goHome })]),
-      el('p', { className: 'muted', textContent: t.appSubtitle }),
-    ]),
+    titleBlock,
     el('div', { className: 'row' }, [button(t.openFiles, () => fileInput.click()), openProjectButton, saveProjectButton, themeButton]),
   ]),
+  hero,
   message,
   emptyState,
   workspace,
@@ -379,6 +405,8 @@ function refresh(): void {
   const hasShots = state.shots.length > 0;
   const showHome = state.home || !hasShots;
   emptyState.hidden = !showHome;
+  hero.hidden = !showHome;
+  titleBlock.hidden = showHome;
   workspace.hidden = showHome;
   saveProjectButton.disabled = !hasShots;
   openProjectButton.disabled = !hasShots;

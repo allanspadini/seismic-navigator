@@ -207,7 +207,8 @@ textarea {
 }
 
 .drop-zone {
-  margin-top: 24px;
+  max-width: 1000px;
+  margin: 16px auto 0;
   padding: 48px 16px;
   border: 2px dashed var(--border);
   border-radius: 10px;
@@ -428,6 +429,9 @@ progress {
 }
 
 button.home-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
   padding: 0;
   border: none;
   background: transparent;
@@ -448,4 +452,34 @@ button.home-link:hover {
   max-width: 640px;
   margin-left: auto;
   margin-right: auto;
+}
+
+.compass {
+  display: inline-flex;
+  width: 30px;
+  height: 30px;
+}
+
+.compass svg {
+  width: 100%;
+  height: 100%;
+}
+
+.hero {
+  max-width: 1000px;
+  margin: 4px auto 16px;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  overflow: hidden;
+  line-height: 0;
+}
+
+.hero svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.app-header > .row {
+  margin-left: auto;
 }
