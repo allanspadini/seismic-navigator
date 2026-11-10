@@ -1,0 +1,21 @@
+{
+  "name": "seismic-navigator",
+  "private": true,
+  "version": "0.0.0",
+  "description": "Sísmica de refração no navegador: picking de primeiras chegadas e tomografia de velocidades.",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "devDependencies": {
+    "typescript": "^7.0.2",
+    "vite": "^8.3.7",
+    "vitest": "^5.1.0"
+  }
+}
